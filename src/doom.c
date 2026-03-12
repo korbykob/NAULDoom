@@ -156,7 +156,7 @@ void entry()
         openFiles[i].memory = 0;
     }
     window = createWindow(SCREENWIDTH * FRAMEBUFFER_SCALING, SCREENHEIGHT * FRAMEBUFFER_SCALING);
-    copyString("DOOM Shareware", window->title);
+    copyString("DOOM", window->title);
     readBmp((BmpHeader*)getFile("/programs/doom/desktop.bmp", 0), window->icon);
     window->lockMouse = true;
     doom_set_print(write);
