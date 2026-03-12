@@ -4,6 +4,7 @@
 #include <tty.h>
 #include <hpet.h>
 #include <processes.h>
+#include <scheduler.h>
 #include <desktop.h>
 #include <bmp.h>
 #include <str.h>
@@ -209,32 +210,45 @@ void entry()
             }
             window->eventsTail++;
         }
-        doom_update();
-        uint32_t* buffer = window->buffer;
-        uint32_t* doomVideo = (uint32_t*)doom_get_framebuffer(4);
-        uint8_t skipX = 0;
-        uint8_t skipY = 0;
-        for (uint32_t y = 0; y < SCREENHEIGHT * FRAMEBUFFER_SCALING; y++)
+        int now = I_GetTime();
+        int delta = now - last_update_time;
+        if (delta)
         {
-            for (uint32_t x = 0; x < SCREENWIDTH * FRAMEBUFFER_SCALING; x++)
+            while (delta--)
             {
-                *buffer++ = *doomVideo;
-                skipX++;
-                if (skipX == FRAMEBUFFER_SCALING)
+                doom_force_update();
+            }
+            uint32_t* buffer = window->buffer;
+            uint32_t* doomVideo = (uint32_t*)doom_get_framebuffer(4);
+            uint8_t skipX = 0;
+            uint8_t skipY = 0;
+            for (uint32_t y = 0; y < SCREENHEIGHT * FRAMEBUFFER_SCALING; y++)
+            {
+                for (uint32_t x = 0; x < SCREENWIDTH * FRAMEBUFFER_SCALING; x++)
                 {
-                    skipX = 0;
-                    doomVideo++;
+                    *buffer++ = *doomVideo;
+                    skipX++;
+                    if (skipX == FRAMEBUFFER_SCALING)
+                    {
+                        skipX = 0;
+                        doomVideo++;
+                    }
+                }
+                skipY++;
+                if (skipY == FRAMEBUFFER_SCALING)
+                {
+                    skipY = 0;
+                }
+                else
+                {
+                    doomVideo -= SCREENWIDTH;
                 }
             }
-            skipY++;
-            if (skipY == FRAMEBUFFER_SCALING)
-            {
-                skipY = 0;
-            }
-            else
-            {
-                doomVideo -= SCREENWIDTH;
-            }
         }
+        else
+        {
+            yieldThread();
+        }
+        last_update_time = now;
     }
 }
