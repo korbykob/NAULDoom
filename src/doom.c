@@ -11,6 +11,7 @@
 
 #define DOOM_IMPLEMENTATION
 #pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpragmas"
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 #pragma GCC diagnostic ignored "-Wdangling-pointer="
 #pragma GCC diagnostic ignored "-Wunused-variable"
