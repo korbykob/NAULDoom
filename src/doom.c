@@ -23,6 +23,7 @@
 #pragma GCC diagnostic ignored "-Wenum-conversion"
 #pragma GCC diagnostic ignored "-Wparentheses"
 #pragma GCC diagnostic ignored "-Wenum-compare"
+#pragma GCC diagnostic ignored "-Wunterminated-string-initialization"
 #include <PureDOOM.h>
 #pragma GCC diagnostic pop
 
