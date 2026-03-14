@@ -10,7 +10,21 @@
 #include <str.h>
 
 #define DOOM_IMPLEMENTATION
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#pragma GCC diagnostic ignored "-Wdangling-pointer="
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough="
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+#pragma GCC diagnostic ignored "-Wenum-conversion"
+#pragma GCC diagnostic ignored "-Wparentheses"
+#pragma GCC diagnostic ignored "-Wenum-compare"
 #include <PureDOOM.h>
+#pragma GCC diagnostic pop
 
 #define MAX_FILES_OPEN 5
 #define MICROSECONDS_PER_SECOND 1000000
