@@ -4,10 +4,10 @@
 #include <tty.h>
 #include <hpet.h>
 #include <processes.h>
-#include <scheduler.h>
 #include <desktop.h>
 #include <bmp.h>
 #include <str.h>
+#include <cpu.h>
 
 #define DOOM_IMPLEMENTATION
 #pragma GCC diagnostic push
