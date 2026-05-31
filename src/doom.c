@@ -261,10 +261,7 @@ void entry()
                 }
             }
         }
-        else
-        {
-            yieldThread();
-        }
         last_update_time = now;
+        yieldThread();
     }
 }
